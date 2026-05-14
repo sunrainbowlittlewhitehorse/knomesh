@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="mb-xl">
+  <h2 class="font-display-md text-display-md text-ink mb-xxs">我的知识</h2>
+  <p class="text-secondary font-body-sm">精心策划的智力资产集合，按背景和相关性组织。</p>
+</section>
+
+<!-- Type Tabs -->
+<div class="flex items-center gap-md mb-lg" id="type-tabs">
+  {% set types = [('all', '全部'), ('link', '链接'), ('note', '笔记'), ('code', '代码')] %}
+  {% for key, label in types %}
+  <span class="font-nav-link text-nav-link pb-2 cursor-pointer transition-colors {% if loop.first %}text-primary border-b-2 border-primary{% else %}text-secondary hover:text-primary-active{% endif %}"
+        data-type="{{ key }}">{{ label }}</span>
+  {% endfor %}
+</div>
+
+<!-- Tag Filters -->
+<div class="flex items-center gap-md mb-xl overflow-x-auto tag-scroll py-xxs" id="tag-filters">
+  <span class="whitespace-nowrap px-md py-xs bg-primary text-on-primary rounded-full font-button text-button cursor-pointer" data-tag="">#全部</span>
+  {% for tag in tags %}
+  <span class="whitespace-nowrap px-md py-xs border border-hairline text-secondary hover:border-primary hover:text-primary rounded-full font-button text-button cursor-pointer transition-all"
+        data-tag="{{ tag.name }}">#{{ tag.name }}</span>
+  {% endfor %}
+</div>
+
+<!-- Loading indicator -->
+<div id="loading" class="text-center py-lg hidden">
+  <p class="font-body-md text-muted">加载中...</p>
+</div>
+
+<!-- Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg" id="card-grid">
+</div>
+
+<!-- Empty state -->
+<div id="empty-state" class="hidden text-center py-xxl">
+  <p class="font-display-md text-display-md text-muted mb-md">这里还什么都没有</p>
+  <p class="font-body-md text-muted-soft mb-lg">添加你的第一条知识碎片</p>
+</div>
+
+<!-- Load More -->
+<div id="pagination" class="mt-section flex flex-col items-center justify-center hidden">
+  <button id="btn-load-more"
+    class="px-xl py-md bg-canvas border border-hairline text-ink rounded-lg hover:bg-surface-soft transition-all font-button text-button shadow-sm">
+    加载更多
+  </button>
+  <p class="mt-md font-caption text-caption text-muted-soft uppercase tracking-widest" id="item-count"></p>
+</div>
+
+{% endblock %}

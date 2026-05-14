@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "hairline": "#e6dfd8",
+                        "surface-soft": "#f5f0e8",
+                        "accent-amber": "#e8a55a",
+                        "inverse-surface": "#372e2c",
+                        "success": "#5db872",
+                        "on-tertiary-fixed": "#00201d",
+                        "secondary": "#605e5b",
+                        "surface-dim": "#e6d7d3",
+                        "surface-variant": "#efdfdb",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#ffb59d",
+                        "surface-container-lowest": "#ffffff",
+                        "body-strong": "#252523",
+                        "on-secondary-fixed-variant": "#484644",
+                        "on-surface": "#211a18",
+                        "surface-tint": "#924a31",
+                        "tertiary": "#00685f",
+                        "secondary-fixed-dim": "#cac6c2",
+                        "primary-disabled": "#e6dfd8",
+                        "tertiary-container": "#0f8378",
+                        "surface": "#fff8f6",
+                        "primary-container": "#ad5f45",
+                        "surface-dark-soft": "#1f1e1b",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#efdfdb",
+                        "surface-card": "#efe9de",
+                        "secondary-fixed": "#e6e2de",
+                        "on-secondary-container": "#666461",
+                        "on-dark-soft": "#a09d96",
+                        "on-secondary-fixed": "#1c1b19",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#ffb59d",
+                        "canvas": "#faf9f5",
+                        "background": "#fff8f6",
+                        "surface-container": "#faebe6",
+                        "outline-variant": "#dac1ba",
+                        "primary-fixed": "#ffdbd0",
+                        "surface-container-low": "#fff1ed",
+                        "on-error-container": "#93000a",
+                        "warning": "#d4a017",
+                        "on-primary-container": "#fffbff",
+                        "on-dark": "#faf9f5",
+                        "ink": "#141413",
+                        "on-surface-variant": "#54433e",
+                        "hairline-soft": "#ebe6df",
+                        "on-tertiary-container": "#f4fffc",
+                        "surface-container-high": "#f4e5e1",
+                        "surface-bright": "#fff8f6",
+                        "secondary-container": "#e6e2de",
+                        "on-error": "#ffffff",
+                        "primary": "#8f482f",
+                        "surface-dark-elevated": "#252320",
+                        "primary-active": "#a9583e",
+                        "error": "#c64545",
+                        "surface-dark": "#181715",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#77d7ca",
+                        "tertiary-fixed": "#94f3e6",
+                        "muted-soft": "#8e8b82",
+                        "muted": "#6c6a64",
+                        "on-primary-fixed": "#390c00",
+                        "on-primary-fixed-variant": "#75331c",
+                        "accent-teal": "#5db8a6",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "on-background": "#211a18",
+                        "inverse-on-surface": "#fdede9",
+                        "outline": "#87736d",
+                        "body": "#3d3d3a",
+                        "surface-cream-strong": "#e8e0d2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "sm": "12px",
+                        "section": "96px",
+                        "xs": "8px",
+                        "xxs": "4px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "caption": ["StyreneB, Inter, sans-serif"],
+                        "title-md": ["StyreneB, Inter, sans-serif"],
+                        "button": ["StyreneB, Inter, sans-serif"],
+                        "body-md": ["StyreneB, Inter, sans-serif"],
+                        "display-sm": ["Copernicus, Tiempos Headline, serif"],
+                        "title-sm": ["StyreneB, Inter, sans-serif"],
+                        "code": ["JetBrains Mono, ui-monospace, monospace"],
+                        "display-xl": ["Copernicus, Tiempos Headline, serif"],
+                        "title-lg": ["StyreneB, Inter, sans-serif"],
+                        "display-lg": ["Copernicus, Tiempos Headline, serif"],
+                        "body-sm": ["StyreneB, Inter, sans-serif"],
+                        "nav-link": ["StyreneB, Inter, sans-serif"],
+                        "caption-uppercase": ["StyreneB, Inter, sans-serif"],
+                        "display-md": ["Copernicus, Tiempos Headline, serif"]
+                    },
+                    "fontSize": {
+                        "caption": ["13px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "title-md": ["18px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "button": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.55", "fontWeight": "400"}],
+                        "display-sm": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "400"}],
+                        "title-sm": ["16px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "code": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-xl": ["64px", {"lineHeight": "1.05", "letterSpacing": "-1.5px", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-1px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.55", "fontWeight": "400"}],
+                        "nav-link": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "caption-uppercase": ["12px", {"lineHeight": "1.4", "letterSpacing": "1.5px", "fontWeight": "500"}],
+                        "display-md": ["36px", {"lineHeight": "1.15", "letterSpacing": "-0.5px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf9f5;
+            color: #141413;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex font-body-md text-body-md overflow-x-hidden">
+<!-- Sidebar Navigation -->
+<aside class="hidden lg:flex flex-col h-screen w-64 fixed left-0 top-0 p-md gap-xs bg-surface-soft border-r border-hairline z-40">
+<div class="px-md py-lg mb-lg">
+<h1 class="font-title-lg text-title-lg text-ink">KnoMesh</h1>
+<p class="font-body-sm text-body-sm text-secondary">个人知识库</p>
+</div>
+<nav class="flex flex-col gap-xxs flex-1">
+<a class="flex items-center gap-sm px-md py-sm text-secondary hover:bg-hairline-soft transition-all rounded-lg font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                文库
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-secondary hover:bg-hairline-soft transition-all rounded-lg font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="sell">sell</span>
+                标签
+            </a>
+<a class="flex items-center gap-sm px-md py-sm bg-surface-container text-primary font-bold rounded-lg font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+                统计
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-secondary hover:bg-hairline-soft transition-all rounded-lg font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="archive">archive</span>
+                归档
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-secondary hover:bg-hairline-soft transition-all rounded-lg font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+                废纸篓
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-xs pt-lg border-t border-hairline">
+<div class="bg-primary px-md py-md rounded-lg text-on-primary text-center">
+<p class="text-caption font-caption mb-xs">存储空间: 85% 已满</p>
+<button class="w-full bg-on-primary text-primary py-xs rounded-full font-button text-button">升级专业版</button>
+</div>
+<a class="flex items-center gap-sm px-md py-xs text-secondary font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                帮助
+            </a>
+<a class="flex items-center gap-sm px-md py-xs text-secondary font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+                隐私
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 min-h-screen bg-canvas pb-section">
+<!-- Top Nav Bar -->
+<header class="fixed top-0 right-0 left-0 lg:left-64 h-16 bg-canvas z-50 border-b border-hairline flex items-center justify-between px-lg max-w-[1200px] mx-auto">
+<div class="flex items-center gap-lg">
+<nav class="flex items-center gap-md">
+<a class="font-nav-link text-nav-link text-secondary pb-2" href="#">全部</a>
+<a class="font-nav-link text-nav-link text-secondary pb-2" href="#">链接</a>
+<a class="font-nav-link text-nav-link text-secondary pb-2" href="#">笔记</a>
+<a class="font-nav-link text-nav-link text-secondary pb-2" href="#">代码</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-primary text-on-primary px-md py-xxs rounded-full font-button text-button flex items-center gap-xxs">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                    添加条目
+                </button>
+<span class="material-symbols-outlined text-secondary cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-secondary cursor-pointer" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-hairline">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqKRgrTHBmCajHEVJSqapA2h_mzU0aTd7w-h9jTlf1zoYm_nhGp4GnluHGkpWw_hFYAO2NVvXijqpM0ptjy_e5zJKXUkmP5BfaEl-R-Hk2LlSo4X6_kgJJrFCePfT9118KdLIMpsSV_w5JgBt_Qr8aeNtW279PzxkvGPzwM4JIMjX1QRVI-D5KAJwGI0xj__jQUSr-IZd7YT0EJAVSJsbK1_NxoZR4L0_ksmGfHykokbq_isgGaIONCIY_nuXW6WW_kjt7CEXBvXQ"/>
+</div>
+</div>
+</header>
+<!-- Stats Content Area -->
+<div class="mt-20 px-lg lg:px-xl max-w-[1000px] mx-auto pt-lg">
+<div class="mb-xl">
+<h2 class="font-display-md text-display-md text-ink mb-xxs">洞察</h2>
+<p class="text-secondary font-body-sm">分析您的个人知识库</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Hero Total Count Stat -->
+<div class="md:col-span-12 lg:col-span-8 bg-surface-card p-xl rounded-xl relative overflow-hidden group">
+<div class="relative z-10">
+<span class="text-caption-uppercase font-caption-uppercase text-primary mb-sm block">总量统计</span>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-xl text-display-xl text-ink">1,248</span>
+<span class="font-title-lg text-title-lg text-secondary">个已保存条目</span>
+</div>
+<div class="mt-lg flex gap-md">
+<div class="flex items-center gap-xxs text-success font-body-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+                                本月增长 +12%
+                            </div>
+</div>
+</div>
+<!-- Subtle abstract background element -->
+<div class="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-colors"></div>
+</div>
+<!-- Right Rail Small Stats -->
+<div class="md:col-span-12 lg:col-span-4 flex flex-col gap-lg">
+<div class="bg-surface-dark p-lg rounded-xl text-on-dark shadow-sm">
+<p class="font-caption-uppercase text-caption-uppercase text-on-dark-soft mb-sm">同步状态</p>
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md">已是最新版本</span>
+<span class="material-symbols-outlined text-success" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<div class="bg-surface-container p-lg rounded-xl border border-hairline">
+<p class="font-caption-uppercase text-caption-uppercase text-secondary mb-sm">平均每日保存</p>
+<div class="flex items-center gap-xs">
+<span class="font-display-sm text-display-sm text-ink">8.4</span>
+<span class="font-body-sm text-secondary">个条目 / 日</span>
+</div>
+</div>
+</div>
+<!-- Type Breakdown (Horizontal Bars) -->
+<div class="md:col-span-12 lg:col-span-6 space-y-lg">
+<div class="bg-canvas border border-hairline p-lg rounded-xl">
+<h3 class="font-title-md text-title-md text-ink mb-xl">内容分布</h3>
+<div class="space-y-xl">
+<!-- Links -->
+<div>
+<div class="flex justify-between items-center mb-xs">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="link">link</span>
+<span class="font-body-md">链接</span>
+</div>
+<span class="font-code text-code text-secondary">642</span>
+</div>
+<div class="h-2 w-full bg-hairline-soft rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 51%"></div>
+</div>
+</div>
+<!-- Notes -->
+<div>
+<div class="flex justify-between items-center mb-xs">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="description">description</span>
+<span class="font-body-md">笔记</span>
+</div>
+<span class="font-code text-code text-secondary">412</span>
+</div>
+<div class="h-2 w-full bg-hairline-soft rounded-full overflow-hidden">
+<div class="h-full bg-primary/70 rounded-full" style="width: 33%"></div>
+</div>
+</div>
+<!-- Code Snippets -->
+<div>
+<div class="flex justify-between items-center mb-xs">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="code">code</span>
+<span class="font-body-md">代码</span>
+</div>
+<span class="font-code text-code text-secondary">194</span>
+</div>
+<div class="h-2 w-full bg-hairline-soft rounded-full overflow-hidden">
+<div class="h-full bg-primary/40 rounded-full" style="width: 16%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Timeline -->
+<div class="md:col-span-12 lg:col-span-6">
+<div class="bg-canvas border border-hairline p-lg rounded-xl h-full">
+<h3 class="font-title-md text-title-md text-ink mb-xl">近期活动</h3>
+<div class="relative pl-lg border-l border-hairline ml-xs space-y-xl">
+<!-- Today -->
+<div class="relative">
+<div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-primary border-4 border-canvas"></div>
+<p class="font-caption-uppercase text-caption-uppercase text-primary mb-xs">今天</p>
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-surface-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="article">article</span>
+</div>
+<p class="font-body-sm text-body-strong">保存了 Aeon 的 "超文本的未来"</p>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-surface-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="javascript">javascript</span>
+</div>
+<p class="font-body-sm text-body-strong">在 #react-patterns 中添加了 3 个代码块</p>
+</div>
+</div>
+</div>
+<!-- Yesterday -->
+<div class="relative">
+<div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-hairline border-4 border-canvas"></div>
+<p class="font-caption-uppercase text-caption-uppercase text-secondary mb-xs">昨天</p>
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-hairline-soft rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="link">link</span>
+</div>
+<p class="font-body-sm text-secondary">将 14 篇研究论文剪藏到归档</p>
+</div>
+</div>
+</div>
+<!-- Earlier this week -->
+<div class="relative">
+<div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-hairline border-4 border-canvas"></div>
+<p class="font-caption-uppercase text-caption-uppercase text-secondary mb-xs">本周</p>
+<div class="flex flex-col gap-sm">
+<p class="font-body-sm text-secondary italic">28 个条目已归档，创建了 5 个新标签。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Top Tags Ranked List -->
+<div class="md:col-span-12">
+<div class="bg-surface-card p-xl rounded-xl">
+<div class="flex justify-between items-center mb-xl">
+<h3 class="font-title-lg text-title-lg text-ink">最常用标签</h3>
+<button class="text-primary font-button text-button hover:underline">查看所有标签</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-md">
+<div class="p-lg bg-canvas rounded-lg border border-hairline hover:border-primary/30 transition-colors">
+<p class="text-caption text-secondary mb-xxs">#01</p>
+<p class="font-title-md text-title-md text-ink mb-md">Architecture</p>
+<div class="flex justify-between items-center">
+<span class="text-body-sm text-secondary">124 个条目</span>
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+<div class="p-lg bg-canvas rounded-lg border border-hairline hover:border-primary/30 transition-colors">
+<p class="text-caption text-secondary mb-xxs">#02</p>
+<p class="font-title-md text-title-md text-ink mb-md">Typography</p>
+<div class="flex justify-between items-center">
+<span class="text-body-sm text-secondary">98 个条目</span>
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+<div class="p-lg bg-canvas rounded-lg border border-hairline hover:border-primary/30 transition-colors">
+<p class="text-caption text-secondary mb-xxs">#03</p>
+<p class="font-title-md text-title-md text-ink mb-md">Philosophy</p>
+<div class="flex justify-between items-center">
+<span class="text-body-sm text-secondary">85 个条目</span>
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="horizontal_rule">horizontal_rule</span>
+</div>
+</div>
+<div class="p-lg bg-canvas rounded-lg border border-hairline hover:border-primary/30 transition-colors">
+<p class="text-caption text-secondary mb-xxs">#04</p>
+<p class="font-title-md text-title-md text-ink mb-md">AI-Ethics</p>
+<div class="flex justify-between items-center">
+<span class="text-body-sm text-secondary">62 个条目</span>
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+<div class="p-lg bg-canvas rounded-lg border border-hairline hover:border-primary/30 transition-colors">
+<p class="text-caption text-secondary mb-xxs">#05</p>
+<p class="font-title-md text-title-md text-ink mb-md">Cooking</p>
+<div class="flex justify-between items-center">
+<span class="text-body-sm text-secondary">41 个条目</span>
+<span class="material-symbols-outlined text-error text-[20px]" data-icon="trending_down">trending_down</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Slide-out Contextual Insights (Right Sidebar) -->
+<aside class="hidden xl:flex flex-col w-80 bg-surface-cream-strong border-l border-hairline h-screen sticky top-0 p-lg gap-lg overflow-y-auto">
+<div>
+<h4 class="font-caption-uppercase text-caption-uppercase text-secondary mb-md">知识图谱预览</h4>
+<div class="w-full aspect-square bg-surface-dark-elevated rounded-xl relative overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover opacity-60" data-alt="A sophisticated abstract visualization of a neural network or a knowledge graph. Glowing dots are connected by thin, shimmering golden lines against a deep, dark navy background. The style is technical yet artistic, suggesting interconnected data and complex intelligence. Soft ambient light illuminates the central nodes of the network." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQLCjsM5mYNPBmwDxK7DOzd2RCSdBt4aGczi4F0CoURSSrBeiV5plRovzS9R-_99fnnR_VpOZNs3H5bEesskQootl3omecUuMaW58kLrRIILeJgrAG3pXE1Cm8UdFZ3REDdklfuULiTtjJBVn5uK1CGMKvrgoQVe0q5XXWooT62IhmfDHHt8Rd2Duyf6E13guOOPBcCu46UwNY90F0Oa1SmR3lri-OsMN6nSTAY-zQvyC1BpKJJOBRQdyisnBMtfcxZSdfDbjNQ5Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark-elevated to-transparent"></div>
+<div class="absolute bottom-md left-md right-md">
+<p class="text-white font-body-sm text-[12px]">查看完整 3D 图谱</p>
+</div>
+</div>
+</div>
+<div class="space-y-md">
+<h4 class="font-caption-uppercase text-caption-uppercase text-secondary">语义建议</h4>
+<div class="bg-canvas/50 p-md rounded-lg border border-hairline shadow-sm">
+<p class="font-body-sm text-ink mb-xs">合并 #Typography 与 #Architecture?</p>
+<p class="text-caption text-secondary">这些标签之间有 32 个条目共享相似的词汇模式。</p>
+<button class="mt-sm text-primary font-button text-button flex items-center gap-xxs">
+                    探索合并 <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="bg-canvas/50 p-md rounded-lg border border-hairline shadow-sm">
+<p class="font-body-sm text-ink mb-xs">陈旧内容提醒</p>
+<p class="text-caption text-secondary">#React 标签下的 15 个条目已超过 12 个月未更新。</p>
+<button class="mt-sm text-secondary font-button text-button flex items-center gap-xxs">
+                    查看条目 <span class="material-symbols-outlined text-[16px]" data-icon="history">history</span>
+</button>
+</div>
+</div>
+<div class="mt-auto bg-primary/10 p-md rounded-xl border border-primary/20">
+<h5 class="font-title-sm text-title-sm text-primary mb-xs">每周摘要</h5>
+<p class="text-caption text-secondary mb-md">您的 AI 生成知识报告已就绪。</p>
+<button class="w-full bg-primary text-on-primary py-xs rounded-lg font-button text-button">阅读摘要</button>
+</div>
+</aside>
+<!-- FAB for Contextual Stats Screen -->
+<button class="fixed bottom-lg right-lg lg:hidden w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center z-50">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</body></html>

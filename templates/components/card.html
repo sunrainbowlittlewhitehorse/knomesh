@@ -1,0 +1,30 @@
+{% set icon_map = {'link': 'link', 'note': 'description', 'code': 'code'} %}
+{% set is_dark = item.type == 'code' %}
+<div class="group {% if is_dark %}bg-surface-dark{% else %}bg-surface-card{% endif %} p-lg rounded-xl border border-transparent hover:border-hairline hover:shadow-sm transition-all duration-300 cursor-pointer" data-id="{{ item.id }}">
+  <div class="flex items-start justify-between mb-md">
+    <div class="w-10 h-10 rounded-lg {% if is_dark %}bg-surface-dark-soft{% else %}bg-surface-container{% endif %} flex items-center justify-center {% if is_dark %}text-primary-fixed-dim{% else %}text-primary{% endif %}">
+      <span class="material-symbols-outlined">{{ icon_map[item.type] }}</span>
+    </div>
+    <span class="font-caption text-caption {% if is_dark %}text-on-dark-soft{% else %}text-muted-soft{% endif %}">{{ item.created_at[:10] }}</span>
+  </div>
+  <h3 class="font-title-md text-title-md {% if is_dark %}text-on-dark{% else %}text-body-strong{% endif %} mb-xs line-clamp-1 {% if not is_dark %}group-hover:text-primary{% endif %} transition-colors">{{ item.title }}</h3>
+  <p class="font-body-sm {% if is_dark %}text-on-dark-soft{% else %}text-muted{% endif %} mb-lg line-clamp-1 {% if is_dark %}font-code{% endif %}">
+    {%- if item.type == 'code' -%}
+      {{ item.content[:80] }}{% if item.content|length > 80 %}...{% endif %}
+    {%- elif item.type == 'link' -%}
+      {{ item.url or item.content[:80] }}
+    {%- else -%}
+      {{ item.content[:80] }}
+    {%- endif -%}
+  </p>
+  <div class="flex items-center justify-between">
+    <div class="flex gap-xxs">
+      {% include 'components/tag_pills.html' %}
+    </div>
+    {% if is_dark %}
+    <span class="material-symbols-outlined text-on-dark-soft text-[18px]">terminal</span>
+    {% else %}
+    <span class="material-symbols-outlined text-muted-soft text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+    {% endif %}
+  </div>
+</div>

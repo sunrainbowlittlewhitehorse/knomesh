@@ -1,0 +1,5 @@
+{% if tags %}
+{% for tag in tags %}
+<span class="px-xs py-[2px] bg-hairline-soft rounded text-[11px] font-medium text-muted uppercase tracking-wider">#{{ tag.name }}</span>
+{% endfor %}
+{% endif %}

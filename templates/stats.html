@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="mb-xl">
+  <h2 class="font-display-md text-display-md text-ink mb-xxs">洞察</h2>
+  <p class="text-secondary font-body-sm">分析您的个人知识库</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg" id="stats-grid">
+  <!-- Total Count -->
+  <div class="md:col-span-12 lg:col-span-8 bg-surface-card p-xl rounded-xl relative overflow-hidden">
+    <div class="relative z-10">
+      <span class="text-caption-uppercase font-caption-uppercase text-primary mb-sm block">总量统计</span>
+      <div class="flex items-baseline gap-xs">
+        <span class="font-display-xl text-display-xl text-ink" id="stat-total">0</span>
+        <span class="font-title-lg text-title-lg text-secondary">个已保存条目</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Type Breakdown -->
+  <div class="md:col-span-12 lg:col-span-6 space-y-lg">
+    <div class="bg-canvas border border-hairline p-lg rounded-xl">
+      <h3 class="font-title-md text-title-md text-ink mb-xl">内容分布</h3>
+      <div class="space-y-xl">
+        {% for t in [('link', '链接'), ('note', '笔记'), ('code', '代码')] %}
+        <div>
+          <div class="flex justify-between items-center mb-xs">
+            <div class="flex items-center gap-xs">
+              <span class="material-symbols-outlined text-primary text-[20px]">{{ {'link': 'link', 'note': 'description', 'code': 'code'}[t[0]] }}</span>
+              <span class="font-body-md">{{ t[1] }}</span>
+            </div>
+            <span class="font-code text-code text-secondary" id="stat-{{ t[0] }}">0</span>
+          </div>
+          <div class="h-2 w-full bg-hairline-soft rounded-full overflow-hidden">
+            <div class="h-full rounded-full stat-bar" data-type="{{ t[0] }}" style="width: 0%"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Tags -->
+  <div class="md:col-span-12">
+    <div class="bg-surface-card p-xl rounded-xl">
+      <h3 class="font-title-lg text-title-lg text-ink mb-xl">最常用标签</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-md" id="top-tags-grid">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+fetch('/api/stats')
+  .then(r => r.json())
+  .then(res => {
+    if (!res.ok) return;
+    const data = res.data;
+    document.getElementById('stat-total').textContent = data.total;
+    const total = data.total || 1;
+    const types = {'link': 0, 'note': 0, 'code': 0};
+    Object.assign(types, data.by_type);
+    document.getElementById('stat-link').textContent = types.link;
+    document.getElementById('stat-note').textContent = types.note;
+    document.getElementById('stat-code').textContent = types.code;
+    document.querySelectorAll('.stat-bar').forEach(el => {
+      const t = el.dataset.type;
+      el.style.width = (types[t] / total * 100) + '%';
+    });
+    const grid = document.getElementById('top-tags-grid');
+    if (data.top_tags.length === 0) {
+      grid.innerHTML = '<p class="font-body-md text-muted col-span-full">暂无标签</p>';
+    } else {
+      data.top_tags.forEach((tag, i) => {
+        grid.innerHTML += `
+          <div class="p-lg bg-canvas rounded-lg border border-hairline">
+            <p class="text-caption text-secondary mb-xxs">#${String(i+1).padStart(2, '0')}</p>
+            <p class="font-title-md text-title-md text-ink mb-md">${tag.name}</p>
+            <p class="text-body-sm text-secondary">${tag.count} 个条目</p>
+          </div>`;
+      });
+    }
+  });
+</script>
+{% endblock %}

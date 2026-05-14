@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "error": "#c64545", "on-primary": "#ffffff", "primary": "#8f482f",
+        "primary-active": "#a9583e", "primary-disabled": "#e6dfd8",
+        "success": "#5db872", "warning": "#d4a017",
+        "on-dark-soft": "#a09d96", "on-dark": "#faf9f5",
+        "body-strong": "#252523", "body": "#3d3d3a",
+        "muted-soft": "#8e8b82", "muted": "#6c6a64",
+        "ink": "#141413",
+        "hairline-soft": "#ebe6df", "hairline": "#e6dfd8",
+        "surface-dark-elevated": "#252320", "surface-dark-soft": "#1f1e1b",
+        "surface-dark": "#181715",
+        "surface-cream-strong": "#e8e0d2",
+        "surface-card": "#efe9de", "surface-soft": "#f5f0e8",
+        "surface-container": "#faebe6",
+        "canvas": "#faf9f5",
+        "accent-teal": "#5db8a6", "accent-amber": "#e8a55a",
+        "primary-fixed-dim": "#ffb59d", "primary-container": "#ad5f45"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+      },
+      "spacing": {
+        "xxs": "4px", "xs": "8px", "sm": "12px", "md": "16px",
+        "lg": "24px", "xl": "32px", "xxl": "48px", "section": "96px"
+      },
+      "fontFamily": {
+        "display-xl": ["Copernicus, Tiempos Headline, serif"],
+        "display-lg": ["Copernicus, Tiempos Headline, serif"],
+        "display-md": ["Copernicus, Tiempos Headline, serif"],
+        "display-sm": ["Copernicus, Tiempos Headline, serif"],
+        "title-lg": ["StyreneB, Inter, sans-serif"],
+        "title-md": ["StyreneB, Inter, sans-serif"],
+        "title-sm": ["StyreneB, Inter, sans-serif"],
+        "body-md": ["StyreneB, Inter, sans-serif"],
+        "body-sm": ["StyreneB, Inter, sans-serif"],
+        "button": ["StyreneB, Inter, sans-serif"],
+        "nav-link": ["StyreneB, Inter, sans-serif"],
+        "caption": ["StyreneB, Inter, sans-serif"],
+        "caption-uppercase": ["StyreneB, Inter, sans-serif"],
+        "code": ["JetBrains Mono, ui-monospace, monospace"]
+      },
+      "fontSize": {
+        "display-xl": ["64px", {"lineHeight": "1.05", "letterSpacing": "-1.5px", "fontWeight": "400"}],
+        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-1px", "fontWeight": "400"}],
+        "display-md": ["36px", {"lineHeight": "1.15", "letterSpacing": "-0.5px", "fontWeight": "400"}],
+        "display-sm": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.3px", "fontWeight": "400"}],
+        "title-lg": ["22px", {"lineHeight": "1.3", "fontWeight": "500"}],
+        "title-md": ["18px", {"lineHeight": "1.4", "fontWeight": "500"}],
+        "title-sm": ["16px", {"lineHeight": "1.4", "fontWeight": "500"}],
+        "body-md": ["16px", {"lineHeight": "1.55", "fontWeight": "400"}],
+        "body-sm": ["14px", {"lineHeight": "1.55", "fontWeight": "400"}],
+        "code": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+        "button": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+        "nav-link": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+        "caption": ["13px", {"lineHeight": "1.4", "fontWeight": "500"}],
+        "caption-uppercase": ["12px", {"lineHeight": "1.4", "letterSpacing": "1.5px", "fontWeight": "500"}]
+      }
+    },
+  },
+}
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; line-height: 1; }
+  body { background-color: #faf9f5; color: #141413; -webkit-font-smoothing: antialiased; }
+  .tag-scroll::-webkit-scrollbar { display: none; }
+  .tag-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  .code-editor {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    background-color: #181715;
+    color: #faf9f5;
+    border-color: #1f1e1b;
+    min-height: 280px;
+    resize: vertical;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .code-editor:focus {
+    border-color: #ffb59d;
+    box-shadow: 0 0 0 4px rgba(255, 181, 157, 0.15);
+  }
+</style>
+{% block head %}{% endblock %}
+</head>
+<body class="bg-canvas">
+<!-- Top Nav -->
+<header class="fixed top-0 w-full z-50 h-16 flex items-center px-lg bg-canvas border-b border-hairline">
+  <div class="max-w-[1200px] mx-auto w-full flex items-center justify-between">
+    <div class="flex items-center gap-xl">
+      <a href="/" class="font-display-sm text-display-sm font-bold text-primary">KnoMesh</a>
+      <div class="hidden md:flex relative items-center">
+        <span class="material-symbols-outlined absolute left-3 text-muted">search</span>
+        <input id="search-input"
+          class="h-10 pl-10 pr-4 w-64 bg-surface-soft border border-hairline rounded-lg text-body-sm focus:ring-3 focus:ring-primary/15 focus:border-primary outline-none transition-all"
+          placeholder="搜索知识..." type="text">
+      </div>
+    </div>
+    <div class="flex items-center gap-md">
+      <button id="btn-add"
+        class="flex items-center gap-xs px-md h-10 bg-primary text-on-primary rounded-full hover:bg-primary-active transition-colors font-button text-button">
+        <span class="material-symbols-outlined">add</span>
+        <span>新增项目</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Sidebar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-soft border-r border-hairline hidden lg:flex flex-col p-md gap-xs">
+  <div class="mb-lg px-xs">
+    <h4 class="font-caption-uppercase text-caption-uppercase text-muted-soft mb-sm">导航</h4>
+    <nav class="flex flex-col gap-xxs">
+      <a href="/"
+        class="flex items-center gap-md px-md py-sm rounded-lg transition-all {% if active_page == 'library' %}bg-surface-container text-primary font-bold{% else %}text-secondary hover:bg-hairline-soft{% endif %}">
+        <span class="material-symbols-outlined">inventory_2</span>
+        <span class="font-body-sm">知识库</span>
+      </a>
+      <a href="/tags"
+        class="flex items-center gap-md px-md py-sm rounded-lg transition-all {% if active_page == 'tags' %}bg-surface-container text-primary font-bold{% else %}text-secondary hover:bg-hairline-soft hover:text-primary{% endif %}">
+        <span class="material-symbols-outlined">sell</span>
+        <span class="font-body-sm">标签</span>
+      </a>
+      <a href="/stats"
+        class="flex items-center gap-md px-md py-sm rounded-lg transition-all {% if active_page == 'stats' %}bg-surface-container text-primary font-bold{% else %}text-secondary hover:bg-hairline-soft hover:text-primary{% endif %}">
+        <span class="material-symbols-outlined">query_stats</span>
+        <span class="font-body-sm">统计</span>
+      </a>
+    </nav>
+  </div>
+  <div class="mt-auto px-xs pt-xl border-t border-hairline">
+    <p class="font-caption text-caption text-muted-soft">KnoMesh v1.0</p>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="pt-24 pb-section max-w-[1200px] mx-auto px-lg lg:ml-64">
+  {% block content %}{% endblock %}
+</main>
+
+{% include 'modal.html' %}
+
+<!-- Confirm Dialog -->
+<div id="confirm-dialog" class="fixed inset-0 bg-ink/30 backdrop-blur-sm z-[60] flex items-center justify-center p-md hidden">
+  <div class="bg-canvas w-full max-w-xs rounded-xl shadow-lg p-lg">
+    <p class="font-body-md text-body-strong mb-lg text-center" id="confirm-message"></p>
+    <div class="flex justify-center gap-md">
+      <button id="confirm-cancel" class="flex-1 h-10 rounded-lg font-button text-button text-secondary border border-hairline hover:bg-hairline-soft transition-all">取消</button>
+      <button id="confirm-ok" class="flex-1 h-10 rounded-lg font-button text-button bg-primary text-on-primary hover:bg-primary-active transition-all">确认</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.showConfirm = function(message) {
+  return new Promise((resolve) => {
+    const dialog = document.getElementById('confirm-dialog');
+    const msgEl = document.getElementById('confirm-message');
+    const okBtn = document.getElementById('confirm-ok');
+    const cancelBtn = document.getElementById('confirm-cancel');
+    msgEl.textContent = message;
+    dialog.classList.remove('hidden');
+    function cleanup() {
+      dialog.classList.add('hidden');
+      okBtn.removeEventListener('click', onOk);
+      cancelBtn.removeEventListener('click', onCancel);
+    }
+    function onOk() { cleanup(); resolve(true); }
+    function onCancel() { cleanup(); resolve(false); }
+    okBtn.addEventListener('click', onOk);
+    cancelBtn.addEventListener('click', onCancel);
+    dialog.addEventListener('click', (e) => { if (e.target === dialog) { onCancel(); } });
+  });
+};
+
+window.showAlert = function(message) {
+  return new Promise((resolve) => {
+    const dialog = document.getElementById('confirm-dialog');
+    const msgEl = document.getElementById('confirm-message');
+    const okBtn = document.getElementById('confirm-ok');
+    const cancelBtn = document.getElementById('confirm-cancel');
+    msgEl.textContent = message;
+    okBtn.textContent = '确定';
+    dialog.classList.remove('hidden');
+    cancelBtn.classList.add('hidden');
+    function cleanup() {
+      dialog.classList.add('hidden');
+      okBtn.textContent = '确认';
+      cancelBtn.classList.remove('hidden');
+      okBtn.removeEventListener('click', onOk);
+    }
+    function onOk() { cleanup(); resolve(); }
+    okBtn.addEventListener('click', onOk);
+    dialog.addEventListener('click', (e) => { if (e.target === dialog) { onOk(); } });
+  });
+};
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('btn-add');
+  if (btn) btn.addEventListener('click', openAddModal);
+});
+</script>
+
+<script src="{{ url_for('static', filename='js/app.js') }}?v=2"></script>
+</body>
+</html>

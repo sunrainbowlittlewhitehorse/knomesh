@@ -1,0 +1,97 @@
+<div id="add-modal" class="fixed inset-0 bg-ink/40 backdrop-blur-sm z-50 flex items-center justify-center p-md hidden">
+  <div class="bg-canvas w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <!-- Header -->
+    <header class="flex items-center justify-between px-xl py-lg border-b border-hairline">
+      <h2 class="font-display-sm text-display-sm text-ink" id="modal-title">添加到知识库</h2>
+      <button class="p-xs hover:bg-hairline-soft rounded-full transition-all modal-close-btn">
+        <span class="material-symbols-outlined text-secondary">close</span>
+      </button>
+    </header>
+
+    <!-- Body -->
+    <div class="flex-1 overflow-y-auto px-xl py-lg space-y-xl">
+      <!-- Type Selector -->
+      <div class="space-y-sm">
+        <label class="font-caption-uppercase text-caption-uppercase text-muted">条目类型</label>
+        <div class="flex gap-md" id="modal-type-selector">
+          {% set types = [('link', 'link', '链接'), ('note', 'description', '笔记'), ('code', 'code', '代码')] %}
+          {% for key, icon, label in types %}
+          <button class="flex-1 flex flex-col items-center gap-xs p-md rounded-lg border-2 transition-all modal-type-btn {% if loop.first %}border-primary bg-surface-container text-primary{% else %}border-hairline hover:bg-hairline-soft text-secondary{% endif %}"
+                  data-type="{{ key }}">
+            <span class="material-symbols-outlined">{{ icon }}</span>
+            <span class="font-button text-button">{{ label }}</span>
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="space-y-lg" id="modal-form">
+        <div class="space-y-xs" id="field-url">
+          <label class="font-title-sm text-title-sm text-body-strong" for="field-url-input">网址</label>
+          <input id="field-url-input"
+            class="w-full h-10 px-md rounded-lg border border-hairline bg-canvas focus:ring-4 focus:ring-primary/15 focus:border-primary outline-none transition-all font-body-sm"
+            placeholder="https://example.com/insight" type="url">
+        </div>
+        <div class="space-y-xs">
+          <label class="font-title-sm text-title-sm text-body-strong" for="field-title">标题</label>
+          <input id="field-title"
+            class="w-full h-10 px-md rounded-lg border border-hairline bg-canvas focus:ring-4 focus:ring-primary/15 focus:border-primary outline-none transition-all font-body-sm"
+            placeholder="条目的描述性标题..." type="text">
+        </div>
+        <div class="space-y-xs" id="field-language">
+          <label class="font-title-sm text-title-sm text-body-strong" for="field-language-select">语言</label>
+          <select id="field-language-select"
+            class="w-full h-10 px-md rounded-lg border border-hairline bg-canvas focus:ring-4 focus:ring-primary/15 focus:border-primary outline-none transition-all font-body-sm">
+            <option value="">选择语言...</option>
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="typescript">TypeScript</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="java">Java</option>
+            <option value="go">Go</option>
+            <option value="rust">Rust</option>
+            <option value="sql">SQL</option>
+            <option value="shell">Shell</option>
+          </select>
+        </div>
+        <div class="space-y-xs">
+          <label class="font-title-sm text-title-sm text-body-strong" for="field-content">内容</label>
+          <textarea id="field-content"
+            class="w-full min-h-[120px] px-md py-sm rounded-lg border border-hairline bg-canvas focus:ring-4 focus:ring-primary/15 focus:border-primary outline-none transition-all font-body-sm"
+            placeholder="写下你的想法..." rows="4"></textarea>
+        </div>
+        <div class="space-y-xs">
+          <label class="font-title-sm text-title-sm text-body-strong">标签</label>
+          <div class="relative">
+            <div class="flex flex-wrap gap-xs p-xs border border-hairline rounded-lg bg-canvas min-h-[40px] items-center" id="tag-input-container">
+              <input id="field-tags"
+                class="flex-1 border-none bg-transparent focus:ring-0 outline-none font-body-sm p-1 min-w-[80px]"
+                placeholder="添加标签..." type="text">
+            </div>
+            <div id="tag-autocomplete" class="absolute top-full left-0 w-full mt-xxs bg-canvas border border-hairline rounded-lg shadow-lg z-10 hidden"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="px-xl py-lg bg-surface-soft flex justify-between gap-md">
+      <button id="btn-delete-item"
+        class="px-lg h-10 rounded-lg font-button text-button text-error border border-error/30 hover:bg-error/10 transition-all hidden">
+        <span class="material-symbols-outlined text-[16px]">delete</span>
+        <span>删除</span>
+      </button>
+      <div class="flex gap-md">
+        <button class="px-lg h-10 rounded-lg font-button text-button text-secondary border border-hairline hover:bg-hairline-soft transition-all modal-close-btn">
+          取消
+        </button>
+        <button id="btn-save"
+          class="px-xl h-10 rounded-lg font-button text-button bg-primary text-on-primary hover:bg-primary-active transition-all">
+          保存条目
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
