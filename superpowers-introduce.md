@@ -78,6 +78,68 @@ brainstorming → writing-plans → executing-plans/subagent-driven-development 
 
 其中 executing-plans 和 subagent-driven-development 二选一，前者是当前 session 内联执行，后者是派独立子代理+双轮审查。
 
+### 两种执行模式详细对比
+
+两者的核心区别在于执行力度和质量门禁：
+
+| 维度 | executing-plans (内联执行) | subagent-driven-development (子代理驱动) |
+|------|--------------------------|----------------------------------------|
+| 执行方式 | 当前 session 中按步骤依次执行 | 每个 task 派独立子代理执行 |
+| 审查机制 | 无自动审查，到检查点手动确认 | 每个 task 自动走两轮审查：spec 合规 → code quality |
+| 修复循环 | 发现问题手动修复 | 审查不通过自动循环修复，通过才进下一 task |
+| 适用场景 | 改动简单、确定性高的任务 | 复杂/关键的改动，质量要求高的场景 |
+| 代价 | 子 agent 调用少 | 每 task 调用 1 个 implementer + 2 个 reviewer |
+| 质量保障 | 依赖人的判断 | 自动化质量门禁，问题早发现早修复 |
+
+### 代码层的质量保障：TDD + verification-before-completion
+
+SDD 和 EP 解决的是**流程层面**的保障（架构、设计、审查），但不管你的代码能不能跑。代码层面的质量由 TDD 和 verification-before-completion 两个技能兜底。
+
+```
+SDD/EP（流程保障）
+  └── 架构对不对？有没有多余功能？
+        ↓
+TDD（逻辑保障）
+  └── 每个函数的逻辑对不对？边界情况覆盖了没有？
+        ↓
+verification-before-completion（集成保障）
+  └── 改了之后整个项目跑不跑得通？
+```
+
+**TDD** 的铁规：必须亲眼看到测试失败，才能写生产代码。
+
+```
+RED   → 写测试，运行 → FAIL（确认测试在测东西）
+GREEN → 写最少代码让测试通过 → PASS
+REFACTOR → 清理代码，测试依然是 GREEN
+```
+
+作用是**确认你的测试真的在测**。如果没看到 RED 就通过了，说明要么测试是假的，要么功能已经存在，这次改动根本没被覆盖。
+
+**verification-before-completion** 的铁规：说"完成了"之前，必须跑验证命令并展示输出。
+
+| 场景 | 验证方式 |
+|------|---------|
+| 改了 JS | `python app.py` 启动确认不报错 |
+| 改了数据库结构 | 运行查询确认表和字段正确 |
+| 前端改动 | curl 页面确认返回 200 |
+| 文件写入 | 确认文件存在且内容正确 |
+
+**两者配合举例：**
+
+```
+TDD:
+  → 写测试: contentInput.classList.contains('code-editor') === true，type='code' → RED
+  → 实现 classList.toggle → GREEN
+  ✓ 功能逻辑正确
+
+verification:
+  → python app.py → 启动失败（引用的变量名写错了）
+  ✓ 代码逻辑没错，但在项目里跑不起来 → 修复
+```
+
+**TDD 保证你写的代码做了该做的事，verification 保证它在项目里真的跑得起来。** 前者防逻辑错误，后者防集成错误。同为代码层的质量保障，但查的是不同维度的问题。
+
 ---
 
 ## 一次完整需求的过程
